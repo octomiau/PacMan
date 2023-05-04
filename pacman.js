@@ -1,33 +1,82 @@
 var pos = 0;
-let pageWidth = window.innerWidth;
 const pacArray = [
-  ["./images/PacMan1.png", "./images/PacMan2.png"],
-  ["./images/PacMan3.png", "./images/PacMan4.png"],
+  ['./PacMan1.png', './PacMan2.png'],
+  ['./PacMan3.png', './PacMan4.png'],
 ];
 var direction = 0;
-var focus = 0;
+const pacMan = [];
 
-function Run() {
-  let img = document.getElementById("PacMan");
-  let imgWidth = img.width;
-  focus = (focus + 1) % 2;
-  direction = checkPageBounds(direction, imgWidth, pos, pageWidth);
-  img.src = pacArray[direction][focus];
-  if (direction) {
-    pos -= 20;
-    img.style.left = pos + "px";
-  } else {
-    pos += 20;
-    img.style.left = pos + "px";
-  }
+function setToRandom(scale) {
+  return {
+    x: Math.random() * scale,
+    y: Math.random() * scale,
+  };
 }
-setInterval(Run, 300);
+// Factory to make a PacMan
+function makePac() {
+  // returns an object with values scaled {x: 33, y: 21}
+  let velocity = setToRandom(10);
+  let position = setToRandom(200);
+  // Add image to div id = game
+  let game = document.getElementById('game');
+  let newimg = document.createElement('img');
+  newimg.style.position = 'absolute';
+  newimg.src = './PacMan1.png';
+  newimg.width = 100;
+  newimg.style.left = position.x;
+  newimg.style.top = position.y;
+  game.appendChild(newimg);
 
-function checkPageBounds(direction, imgWidth, pos, pageWidth) {
-  if (direction == 0 && pos + imgWidth > pageWidth) direction = 1;
-  if (direction == 1 && pos < 0) direction = 0;
-
-  return direction;
+  // new style of creating an object
+  return {
+    position,
+    velocity,
+    newimg,
+  };
 }
 
-module.exports = checkPageBounds;
+function update() {
+  //loop over pacman array and move each one and move image in DOM
+  pacMan.forEach((item) => {
+    checkCollisions(item);
+    item.position.x += item.velocity.x;
+    item.position.y += item.velocity.y;
+
+    item.newimg.style.left = item.position.x;
+    item.newimg.style.top = item.position.y;
+  });
+  setTimeout(update, 20);
+}
+
+function checkCollisions(item) {
+  if (
+    item.position.x + item.velocity.x + item.newimg.width > window.innerWidth ||
+    item.position.x + item.velocity.x < 0
+  )
+    item.velocity.x = -item.velocity.x;
+  if (
+    item.position.y + item.velocity.y + item.newimg.height > window.innerHeight ||
+    item.position.y + item.velocity.y < 0
+  )
+    item.velocity.y = -item.velocity.y;
+}
+
+function makeOne() {
+  pacMan.push(makePac()); // add a new PacMan
+}
+
+//don't change this line
+if (typeof module !== 'undefined') {
+  module.exports = { checkCollisions, update, pacMan };
+}
+
+
+function stopAndFreezeAnimation() {
+  // Stop PacMan movement by clearing the timeout
+  clearTimeout(timeoutId);
+  // Pause PacMan animation by setting animation-play-state to paused
+  pacMan.forEach((item) => {
+    item.velocity = { x: 0, y: 0 }; // set velocity to 0 to freeze movement
+    item.newimg.style.animationPlayState = 'paused';
+  });
+}

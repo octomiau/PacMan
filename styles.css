@@ -1,0 +1,19 @@
+body {
+    background-image: url('BGimg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+  }
+  
+  game-button {
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+  
+ 
