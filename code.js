@@ -61,6 +61,7 @@ function makePac(imageSet) {
         velocity,
         newimg,
         imageSet,
+        imageIndex: 0, // Initialize imageIndex as 0
   };
 
   pacMan.push(pac); // add the new PacMan object to the pacMan array
@@ -120,23 +121,25 @@ function startAnimation() {
 
 
 function checkCollisions(item) {
-    const alternativeImages = pacArray[item.imageSet];
-    
-    if (
-      item.position.x + item.velocity.x + item.newimg.width > articleWidth ||
-      item.position.x + item.velocity.x < 0
-    ) {
-      item.velocity.x = -item.velocity.x;
-      item.newimg.src = alternativeImages[0];
-    }
-    if (
-      item.position.y + item.velocity.y + item.newimg.height > articleHeight ||
-      item.position.y + item.velocity.y < 0
-    ) {
-      item.velocity.y = -item.velocity.y;
-      item.newimg.src = alternativeImages[1];
-    }
+  const alternativeImages = pacArray[item.imageSet];
+
+  if (
+    item.position.x + item.velocity.x + item.newimg.width > articleWidth ||
+    item.position.x + item.velocity.x < 0
+  ) {
+    item.velocity.x = -item.velocity.x;
+    item.newimg.src = item.velocity.x > 0 ? alternativeImages[0] : alternativeImages[1]; // Set the image based on the sign of the velocity
   }
+  if (
+    item.position.y + item.velocity.y + item.newimg.height > articleHeight ||
+    item.position.y + item.velocity.y < 0
+  ) {
+    item.velocity.y = -item.velocity.y;
+    item.newimg.src = item.velocity.y > 0 ? alternativeImages[0] : alternativeImages[1]; // Set the image based on the sign of the velocity
+  }
+}
+
+
   
   function makePac(imageSet) {
     // Update the article dimensions when creating a new Pac-Man
