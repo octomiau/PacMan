@@ -1,19 +1,91 @@
 body {
-    background-image: url('BGimg.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+  background-image: url('background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+}
+
+
+.grid{
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: auto 1fr auto;
+    gap: 5px;
+    height: 100vh;
+}
+  
+  header {
+    grid-column: 1 / -1;
+   
+  }
+  
+  aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.8);
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
   }
   
-  game-button {
-    cursor: pointer;
-    display: inline-block;
-    margin: 10px;
-    padding: 10px;
-    border: none;
-    background: transparent;
-    outline: none;
+  article {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 37%;
+    height: 55%;
+    aspect-ratio: 1/1;
   }
   
- 
+  footer {
+    grid-column: 1 / -1;
+    
+  }
+  
+  .game-button {
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    width: 150px;
+    background: transparent;
+    aspect-ratio: 1/3;
+    
+  }
+  
+  .addPac {
+    background-image: url("addPacButton.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .addGhost {
+    background-image: url("addGhostButton.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .start {
+    background-image: url("startButton.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .pause {
+    background-image: url("pauseButton.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .refresh {
+    background-image: url("refreshButton.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

@@ -1,18 +1,39 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>PacMan</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="./code.js"></script>
+    <link href="styles.css" type="text/css" rel="stylesheet">
+    
+
 </head>
-<!-- DO NOT CHANGE THIS LINE OF CODE -->
-    <script src="./pacman.js"></script>
-    <link rel="stylesheet" type="text/css" href="./styles.css">
 <body>
-    <div id='game'>
-        <img src='addButton.png' alt='Add PacMan' onclick='makeOne()' class='game-button'>
-        <img src='startButton.png' alt='Start Game' onclick='update()' class='game-button'>
-        <img src='pauseButton.png' alt='Stop Game' onclick='stopAndFreezeAnimation()' class='game-button'>
-      </div>
+    
+    <div class="grid">
+    
+        <header></header>
+        <aside>
+            <button class="game-button addGhost" alt='Add Ghost' onclick='makeOne(0)'></button>
+            <button class="game-button addPac" alt='Add PacMan' onclick='makeOne(1)'></button>
+            <button class="game-button start" alt='Start Game'onclick='update()'></button>
+            <button class="game-button pause"alt='Stop Game' onclick='stopAndFreezeAnimation()'></button>
+            <button class="game-button refresh" onclick="location.reload()"></button>
+        </aside>
 
+        <article>
+            <div id='game'>
+            </div>
+        </article>
+
+        <aside></aside>
+        <footer></footer>
+     
+    </div>
+   
+    
 </body>
-
 </html>
