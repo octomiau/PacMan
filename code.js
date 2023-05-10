@@ -128,15 +128,16 @@ function checkCollisions(item) {
     item.position.x + item.velocity.x < 0
   ) {
     item.velocity.x = -item.velocity.x;
-    item.newimg.src = item.velocity.x > 0 ? alternativeImages[0] : alternativeImages[1]; // Set the image based on the sign of the velocity
   }
   if (
     item.position.y + item.velocity.y + item.newimg.height > articleHeight ||
     item.position.y + item.velocity.y < 0
   ) {
     item.velocity.y = -item.velocity.y;
-    item.newimg.src = item.velocity.y > 0 ? alternativeImages[0] : alternativeImages[1]; // Set the image based on the sign of the velocity
   }
+  
+  // Set the image based on the x-axis velocity
+  item.newimg.src = item.velocity.x > 0 ? alternativeImages[1] : alternativeImages[0];
 }
 
 
